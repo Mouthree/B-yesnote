@@ -1,33 +1,17 @@
-use iced::{Color, Element, Length, Size, widget::container, window::Settings};
+mod message;
+mod state;
+mod update;
+mod view;
 
+use state::State;
 
-const BACKGROUND: Color = Color::from_rgb8(0x28, 0x2c, 0x33);
-
-#[derive(Default)]
-struct State {
-}
-fn main() -> iced::Result{
-    iced::application(State::default, update, view)
-        .title("yesNote")
-        .window(Settings {
-            size: Size::new(1000., 700.),
+fn main() -> iced::Result {
+    iced::application(State::default, update::update, view::view)
+        .title("yesnote")
+        .window(iced::window::Settings {
+            size: iced::Size::new(1000.0, 700.0),
             maximized: true,
-            ..Settings::default()
+            ..iced::window::Settings::default()
         })
         .run()
-}
-
-#[derive(Debug, Clone)]
-enum Message{}
-
-fn update(_state: &mut State, _message: Message) {
-    
-}
-
-fn view(_state: &State) -> Element<'_, Message> {
-    container("")
-        .width(Length::Fill)
-        .height(Length::Fill)
-        .style(|_theme| container::Style::default().background(BACKGROUND))
-        .into()
 }
